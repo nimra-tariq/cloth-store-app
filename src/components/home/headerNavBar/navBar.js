@@ -1,4 +1,4 @@
-
+import { useStyles } from './styles';
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,12 +13,14 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = ['Home', 'About', 'Products','Cart'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Home', 'About', 'Products', 'Cart'];
+const settings = ['Home', 'About', 'Products', 'Cart'];
+
 
 const NavBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const classes=useStyles();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -36,8 +38,8 @@ const NavBar = () => {
     };
 
     return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
+        <AppBar className={classes.appBar}  position="static">
+            <Container className={classes.appBar} maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
                         variant="h6"
@@ -45,7 +47,7 @@ const NavBar = () => {
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        LOGO
+                         <img src="logo.png" alt="logo" className={classes.logo} />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -55,7 +57,7 @@ const NavBar = () => {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
-                            color="inherit"
+                            color='primary'
                         >
                             <MenuIcon />
                         </IconButton>
@@ -79,7 +81,7 @@ const NavBar = () => {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                    <Typography color="#233dff" fontWeight= 'bold'   textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -90,14 +92,15 @@ const NavBar = () => {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                     >
-                        LOGO
+                        <img src="logo.png" alt="logo" className={classes.logo} />
                     </Typography>
+                    
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ my: 2, color: '#233dff',fontWeight: 'bold',fontSize: 16, display: 'block' }}
                             >
                                 {page}
                             </Button>
@@ -105,11 +108,11 @@ const NavBar = () => {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
+                        {/* <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                             </IconButton>
-                        </Tooltip>
+                        </Tooltip> */}
                         <Menu
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
@@ -128,7 +131,7 @@ const NavBar = () => {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                                    <Typography  textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>

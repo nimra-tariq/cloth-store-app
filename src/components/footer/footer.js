@@ -1,8 +1,8 @@
 
 import './footer.css'
 export default function Footer() {
-    return <div className='bgFooter'>
-        <div className='footerContainer d-flex justify-content-between'>
+    return <div className='bgFooter '>
+        <div className='footerContainer container d-flex justify-content-between'>
             <div className='footer'><span>Designed and Developed by </span><span><a href="https://github.com/nimra-tariq">nimra-tariq</a></span></div>
             <div className='container-fluid iconContainer'>
                 <a href="https://www.facebook.com/nimra.tariq.90260" className="nav-item nav-link"><i className="fa fa-facebook" /></a>
