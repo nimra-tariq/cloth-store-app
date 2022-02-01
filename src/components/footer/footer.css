@@ -1,3 +1,4 @@
+
 div a {
     text-decoration: none;
 }
@@ -19,7 +20,7 @@ span{
 	margin-right: 10px;
 }
 .footerContainer{
-    margin-top: 20px;  
+    /* margin-top: 20px;   */
     display: flex;
     flex-wrap: wrap;
     justify-content: center !important;
@@ -31,6 +32,7 @@ span{
     display: flex;
     justify-content: center;
 }
-.bgFooter{
+div.bgFooter{
     background-color: #ad9f8e3b;
+    font-family: 'Roboto', sans-serif ;
 }

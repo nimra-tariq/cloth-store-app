@@ -21,17 +21,18 @@ export default function Body() {
         <Box sx={{ width: '100%' }}>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={12} md={12} sm={12}>
-                    <Item><img src="bodyImg.jpg" alt="logo" className={classes.bodyImg} /></Item>
-                </Grid>
-                <Grid item xs={12} md={12} sm={12}>
-                    <Item><Typography className={classes.tagLine} variant="h3" component="h3">
-                        Design You Wear
-                    </Typography>
-                    <div className='container'>
-                        <Typography paragraph={true} variant="h6"  component="h6">
-                            Designer has been your companion in happiness, both big and small, for over 50 years. Our roots are firmly grounded in Pakistan and with its people.
-                        </Typography>
+                    <Item> <div className={classes.bodyBgImg}>
+                        <div className={classes.textContainer}>
+                            <Typography className={classes.tagLine} variant="h3" component="h3">
+                                Design You Wear
+                            </Typography>
+                            <div className='container'>
+                                <Typography paragraph={true} className={classes.paragraph} variant="h6" component="h6">
+                                    Designer has been your companion in happiness, both big and small, for over 50 years. Our roots are firmly grounded in Pakistan and with its people.
+                                </Typography>
+                            </div>
                         </div>
+                    </div>
                     </Item>
                 </Grid>
             </Grid>

@@ -6,9 +6,12 @@
   height: 40vmin;
   pointer-events: none;
 }
+
 *{
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Mochiy Pop P One', sans-serif !important;
 }
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

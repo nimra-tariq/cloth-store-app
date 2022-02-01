@@ -12,15 +12,21 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from "react-router-dom";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-const pages = ['Home', 'About', 'Products', 'Cart'];
+
+const pages = ['Home', 'About', 'Products', <AddShoppingCartIcon />];
 const settings = ['Home', 'About', 'Products', 'Cart'];
+const linkToRoutes = ['/', 'about', 'products', 'addToCart']
 
 
 const NavBar = () => {
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const classes=useStyles();
+    const classes = useStyles();
+    let currentRoute = null;
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -37,8 +43,16 @@ const NavBar = () => {
         setAnchorElUser(null);
     };
 
+    const highLightRoute = (event) => {
+        if (currentRoute)
+            currentRoute.style.border=null;
+        currentRoute = event.target;
+        currentRoute.style.border='2px solid #233dff';
+        
+    }
+
     return (
-        <AppBar className={classes.appBar}  position="static">
+        <AppBar className={classes.appBar} position="static">
             <Container className={classes.appBar} maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
@@ -47,7 +61,7 @@ const NavBar = () => {
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                         <img src="logo.png" alt="logo" className={classes.logo} />
+                        <img src="logo.png" alt="logo" className={classes.logo} />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -79,10 +93,12 @@ const NavBar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography color="#233dff" fontWeight= 'bold'   textAlign="center">{page}</Typography>
-                                </MenuItem>
+                            {pages.map((page, i) => (
+                                <Link key={i} to={linkToRoutes[i]}>
+                                    <MenuItem onClick={handleCloseNavMenu}>
+                                        <Typography fontWeight='400' className={classes.pagesColor} textAlign="center">{page}</Typography>
+                                    </MenuItem>
+                                </Link>
                             ))}
                         </Menu>
                     </Box>
@@ -94,25 +110,27 @@ const NavBar = () => {
                     >
                         <img src="logo.png" alt="logo" className={classes.logo} />
                     </Typography>
-                    
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#233dff',fontWeight: 'bold',fontSize: 16, display: 'block' }}
-                            >
-                                {page}
-                            </Button>
+                        {pages.map((page, i) => (
+                            <Link key={i} to={linkToRoutes[i]} onClick={(e)=>{highLightRoute(e)}}>
+                                <Button className={classes.pages}
+                                    key={page}
+                                    onClick={handleCloseNavMenu, (e) => { highLightRoute(e) }}
+                                    sx={{ my: 2, color: '#233dff', fontWeight: '400', fontSize: 16, display: 'block' }}
+                                >
+                                    {page}
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        {/* <Tooltip title="Open settings">
+                        <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="Designer" sx={{ bgcolor: "#233dff" }}>D</Avatar>
                             </IconButton>
-                        </Tooltip> */}
+                        </Tooltip>
                         <Menu
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
@@ -129,9 +147,9 @@ const NavBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography  textAlign="center">{setting}</Typography>
+                            {settings.map((setting, i) => (
+                                <MenuItem key={i} onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
