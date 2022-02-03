@@ -1,4 +1,4 @@
-import { productSate } from "../../../store/state/productInfoState";
+import { productState } from "../../../store/state/productInfoState";
 import { useParams } from "react-router-dom"
 import * as React from 'react';
 import Box from '@material-ui/core//Box';
@@ -15,9 +15,9 @@ export default function ProductInfo() {
     const classes = useStyles();
     const { id } = useParams();
 
-    let products = productSate;
+    let products = productState;
     let item = products.find(product => (product.productId == id))
-
+    
     //This is what you should do to show that it's loading.
     if (!item || !item.productId) {
         return <div>Loading</div>

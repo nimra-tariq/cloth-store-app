@@ -6,10 +6,16 @@ import Typography from '@material-ui/core//Typography';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { Link } from "react-router-dom";
 import { useStyles } from './styles'
-
+import { useDispatch } from 'react-redux';
+import { actionAddToCart } from '../../../store/actions/productActions';
 
 export default function ProductCard(props) {
+
   const classes = useStyles();
+  const dispatch=useDispatch();
+  function addToCart(id){
+  dispatch(actionAddToCart(id));
+  }
 
   return (<>
     <Box sx={{ minWidth: 275 }} className={classes.box} >
@@ -24,7 +30,7 @@ export default function ProductCard(props) {
             <Typography variant="h5" className={classes.pPrice} component="div">
               {props.productPrice}
             </Typography>
-            <div aria-label='add to cart' className={classes.cartDiv}><span className={classes.cartIcon}><AddShoppingCartIcon /></span></div>
+            <div aria-label='add to cart' onClick={()=>{addToCart(props.productId)}} className={classes.cartDiv}><span className={classes.cartIcon}><AddShoppingCartIcon /></span></div>
           </CardContent>
         </Card>
       </Card>

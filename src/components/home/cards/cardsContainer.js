@@ -50,6 +50,5 @@ export default function CardContainer() {
             <span className="sr-only">Loading...</span>
         </div>
     </div> */}
-    
     </>
 }

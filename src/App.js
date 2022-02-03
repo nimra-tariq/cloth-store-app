@@ -4,7 +4,7 @@ import Home from './components/home/home';
 import Footer from './components/footer/footer';
 import About from './components/about/about';
 import NavBar from './components/home/headerNavBar/navBar';
-import Cart from './components/cart/addToCart';
+import Cart from './components/cart/cart';
 import Products from './components/products/product';
 import ProductInfo from './components/products/cards/ProductInfo';
 import { Provider } from 'react-redux';

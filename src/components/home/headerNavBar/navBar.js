@@ -13,16 +13,18 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from "react-router-dom";
+import Badge from '@mui/material/Badge';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-
-
-const pages = ['Home', 'About', 'Products', <AddShoppingCartIcon />];
-const settings = ['Home', 'About', 'Products', 'Cart'];
-const linkToRoutes = ['/', 'about', 'products', 'addToCart']
-
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
 
+    const products = useSelector(state => state.productReducer);
+    //return an array containing selected item so array.length==totalItems selected by user
+    const totalItems = products.filter(item => item.isSelected === true);
+    const pages = ['Home', 'About', 'Products', <Badge badgeContent={totalItems.length} color="primary"><AddShoppingCartIcon /></Badge>];
+    const settings = ['Home', 'About', 'Products', 'Cart'];
+    const linkToRoutes = ['/', 'about', 'products', 'addToCart']
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const classes = useStyles();
@@ -45,10 +47,9 @@ const NavBar = () => {
 
     const highLightRoute = (event) => {
         if (currentRoute)
-            currentRoute.style.border=null;
+            currentRoute.style.border = null;
         currentRoute = event.target;
-        currentRoute.style.border='2px solid #233dff';
-        
+        currentRoute.style.border = '2px solid #233dff';
     }
 
     return (
@@ -113,7 +114,7 @@ const NavBar = () => {
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page, i) => (
-                            <Link key={i} to={linkToRoutes[i]} onClick={(e)=>{highLightRoute(e)}}>
+                            <Link key={i} to={linkToRoutes[i]} onClick={(e) => { highLightRoute(e) }}>
                                 <Button className={classes.pages}
                                     key={page}
                                     onClick={handleCloseNavMenu, (e) => { highLightRoute(e) }}
