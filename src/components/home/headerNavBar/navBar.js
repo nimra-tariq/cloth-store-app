@@ -25,6 +25,7 @@ const NavBar = () => {
     const pages = ['Home', 'About', 'Products', <Badge badgeContent={totalItems.length} color="primary"><AddShoppingCartIcon /></Badge>];
     const settings = ['Home', 'About', 'Products', 'Cart'];
     const linkToRoutes = ['/', 'about', 'products', 'addToCart']
+    const link=['/','/about','/products','/addToCart']
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const classes = useStyles();
@@ -52,6 +53,7 @@ const NavBar = () => {
         currentRoute.style.border = '2px solid #233dff';
     }
 
+    
     return (
         <AppBar className={classes.appBar} position="static">
             <Container className={classes.appBar} maxWidth="xl">
@@ -119,6 +121,7 @@ const NavBar = () => {
                                     key={page}
                                     onClick={handleCloseNavMenu, (e) => { highLightRoute(e) }}
                                     sx={{ my: 2, color: '#233dff', fontWeight: '400', fontSize: 16, display: 'block' }}
+                                    // selected={pathname === link}
                                 >
                                     {page}
                                 </Button>

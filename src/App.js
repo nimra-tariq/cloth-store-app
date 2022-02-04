@@ -7,6 +7,7 @@ import NavBar from './components/home/headerNavBar/navBar';
 import Cart from './components/cart/cart';
 import Products from './components/products/product';
 import ProductInfo from './components/products/cards/ProductInfo';
+import CheckOut from './components/checkOut/checkOut';
 import { Provider } from 'react-redux';
 import myStore from './store/store';
 import {
@@ -17,8 +18,6 @@ import {
 
 
 function App() {
-
-
 
   return (
     <>
@@ -32,6 +31,7 @@ function App() {
       <Route path="/products" element={<Products/>} /> 
       <Route path="/addToCart" element={<Cart/>} />
       <Route path='/:id' element={<ProductInfo/>}/> 
+      <Route path='/checkOut' element={<CheckOut/>}></Route>
     </Routes>
     </BrowserRouter>
     </Provider>

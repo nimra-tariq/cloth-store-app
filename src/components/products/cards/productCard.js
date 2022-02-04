@@ -28,7 +28,7 @@ export default function ProductCard(props) {
               <br />
             </Typography>
             <Typography variant="h5" className={classes.pPrice} component="div">
-              {props.productPrice}
+              {props.productPrice}.00$
             </Typography>
             <div aria-label='add to cart' onClick={()=>{addToCart(props.productId)}} className={classes.cartDiv}><span className={classes.cartIcon}><AddShoppingCartIcon /></span></div>
           </CardContent>

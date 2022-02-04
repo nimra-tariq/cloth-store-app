@@ -63,7 +63,7 @@ export default function ProductsAddedToCart() {
                                                     <br />
                                                 </Typography>
                                                 <Typography variant="h5" className={classes.pPrice} component="div">
-                                                    {product.productPrice}
+                                                    {product.productPrice}.00$
                                                 </Typography>
                                                 <div className="d-flex justify-content-center"><Typography className={classes.pTitle} variant="h6">
                                                     items</Typography>
