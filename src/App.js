@@ -9,7 +9,10 @@ import Products from './components/products/product';
 import ProductInfo from './components/products/cards/ProductInfo';
 import CheckOut from './components/checkOut/checkOut';
 import { Provider } from 'react-redux';
+import PersonalInfo from './components/checkOut/personalInformation/personalInfo'
 import myStore from './store/store';
+import ShippingAddressInfo from './components/checkOut/shippingAddressInfo/shippingAddressInfo';
+import PlaceOrder from './components/checkOut/placeOrder/placeOrder'
 import {
   BrowserRouter,
   Routes,
@@ -37,6 +40,9 @@ function App() {
     </Provider>
     </div>
     <div><Footer></Footer></div>
+    {/* <PersonalInfo></PersonalInfo> */}
+    {/* <ShippingAddressInfo></ShippingAddressInfo> */}
+    <PlaceOrder></PlaceOrder>
     </>
   );
 }

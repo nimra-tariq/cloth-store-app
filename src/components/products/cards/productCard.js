@@ -12,9 +12,9 @@ import { actionAddToCart } from '../../../store/actions/productActions';
 export default function ProductCard(props) {
 
   const classes = useStyles();
-  const dispatch=useDispatch();
-  function addToCart(id){
-  dispatch(actionAddToCart(id));
+  const dispatch = useDispatch();
+  function addToCart(id) {
+    dispatch(actionAddToCart(id));
   }
 
   return (<>
@@ -30,10 +30,12 @@ export default function ProductCard(props) {
             <Typography variant="h5" className={classes.pPrice} component="div">
               {props.productPrice}.00$
             </Typography>
-            <div aria-label='add to cart' onClick={()=>{addToCart(props.productId)}} className={classes.cartDiv}><span className={classes.cartIcon}><AddShoppingCartIcon /></span></div>
+            <div aria-label='add to cart' onClick={() => { addToCart(props.productId) }} className={classes.cartDiv}><span className={classes.cartIcon}><AddShoppingCartIcon /></span></div>
           </CardContent>
         </Card>
       </Card>
     </Box>
   </>);
 }
+
+
