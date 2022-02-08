@@ -13,6 +13,8 @@ import PersonalInfo from './components/checkOut/personalInformation/personalInfo
 import myStore from './store/store';
 import ShippingAddressInfo from './components/checkOut/shippingAddressInfo/shippingAddressInfo';
 import PlaceOrder from './components/checkOut/placeOrder/placeOrder'
+import ConfirmationCard from './components/checkOut/confirmationCard/confirmationCard';
+import SignIn from './components/signInForm/signIn';
 import {
   BrowserRouter,
   Routes,
@@ -35,14 +37,17 @@ function App() {
       <Route path="/addToCart" element={<Cart/>} />
       <Route path='/:id' element={<ProductInfo/>}/> 
       <Route path='/checkOut' element={<CheckOut/>}></Route>
+      <Route path='/placeOrder' element={<PlaceOrder/>}></Route>
+      <Route path='/signIn' element={<SignIn/>}></Route>
     </Routes>
+    {/* <ConfirmationCard ></ConfirmationCard> */}
     </BrowserRouter>
+    {/* <PersonalInfo></PersonalInfo>
+    <ShippingAddressInfo></ShippingAddressInfo> */}
+   
     </Provider>
     </div>
     <div><Footer></Footer></div>
-    {/* <PersonalInfo></PersonalInfo> */}
-    {/* <ShippingAddressInfo></ShippingAddressInfo> */}
-    <PlaceOrder></PlaceOrder>
     </>
   );
 }

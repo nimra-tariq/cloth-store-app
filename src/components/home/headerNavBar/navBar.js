@@ -12,10 +12,14 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 import Badge from '@mui/material/Badge';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useSelector } from 'react-redux';
+import SignIn from '../../signInForm/signIn';
+import Card from '@material-ui/core//Card';
+import CardContent from '@material-ui/core//CardContent';
+import '../styles.css'
 
 const NavBar = () => {
 
@@ -23,12 +27,11 @@ const NavBar = () => {
     //return an array containing selected item so array.length==totalItems selected by user
     const totalItems = products.filter(item => item.isSelected === true);
     const pages = ['Home', 'About', 'Products', <Badge badgeContent={totalItems.length} color="primary"><AddShoppingCartIcon /></Badge>];
-    const settings = ['Home', 'About', 'Products', 'Cart'];
     const linkToRoutes = ['/', 'about', 'products', 'addToCart']
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const classes = useStyles();
-    let currentRoute = document.getElementsByClassName(classes.pages)[0];
+    const user = useSelector(state => state.userReducer)
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -45,13 +48,7 @@ const NavBar = () => {
         setAnchorElUser(null);
     };
 
-    const highLightRoute = (event) => {
-        if (currentRoute)
-            currentRoute.style.border = null;
-        currentRoute = event.currentTarget;
-        currentRoute.style.border = '2px solid #233dff';
-    }
-
+    
     return (
         <AppBar className={classes.appBar} position="static">
             <Container className={classes.appBar} maxWidth="xl">
@@ -114,22 +111,16 @@ const NavBar = () => {
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page, i) => (
-                            <Link key={i} to={linkToRoutes[i]} >
-                                <Button className={classes.pages}
-                                    key={page}
-                                    onClick={handleCloseNavMenu, (e) => { highLightRoute(e) }}
-                                    sx={{ my: 2, color: '#233dff', fontWeight: '400', fontSize: 16, display: 'block' }}
-                                >
+                            <NavLink key={i} to={linkToRoutes[i]} className={classes.pages}>
                                     {page}
-                                </Button>
-                            </Link>
+                            </NavLink>
                         ))}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Designer" sx={{ bgcolor: "#233dff" }}>D</Avatar>
+                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> 
+                                {(user.signedIn)?<Avatar alt="Designer" sx={{ bgcolor: "#233dff" }}>{user.uemail.charAt(0).toUpperCase()}</Avatar>: <Avatar src="/broken-image.jpg" sx={{ bgcolor: "#233dff" }}/>}
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -148,11 +139,24 @@ const NavBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting, i) => (
-                                <MenuItem key={i} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
+                            {(!user.signedIn)?<SignIn></SignIn>:
+                            <div className="container"><Box sx={{ minWidth: 275 }} className={classes.box} >
+                            <Card variant="outlined">
+                              <Card sx={{ minWidth: 275 }}>
+                                <CardContent>
+                                  <Typography className={classes.title} variant="h6">
+                                    Thank you for registering your customer account
+                                    <br />
+                                  </Typography>
+                                  <Typography className={classes.title} variant="h5">
+                                    your customer pin is {user.upin}
+                                    <br />
+                                  </Typography>
+                                </CardContent>
+                              </Card>
+                            </Card>
+                          </Box></div>
+                            }
                         </Menu>
                     </Box>
                 </Toolbar>

@@ -7,17 +7,16 @@ import { useStyles } from '../styles';
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 export default function OrderSummary() {
+  const dispatch=useDispatch();
   const classes = useStyles();
   const products = useSelector(state => state.productReducer);
+  const netBill=useSelector(state=>state.netBillReducer)
   // total item selected
   const totalItems = products.filter(item => item.isSelected === true);
-  //calculate total bill
-  let totalBill = 0;
-  totalItems.forEach(item => {
-    totalBill = totalBill + (item.productPrice * item.quantity)
-  })
+
   return (
     <>
       <Box sx={{ minWidth: 275 }} className={classes.box} >
@@ -33,7 +32,7 @@ export default function OrderSummary() {
                 <br />
               </Typography>
               <Typography variant="h5" className={classes.pPrice} component="div">
-                Total Amount:{totalBill}.00$
+                Total Amount:{netBill.totalBill}.00$
               </Typography>
               {(totalItems.length != 0) ?
                 <Link to='/checkOut'>

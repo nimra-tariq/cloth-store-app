@@ -14,7 +14,8 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { actionEmptyCart } from "../../../store/actions/productActions";
 import { actiondecrementItem } from "../../../store/actions/productActions";
 import { actionIncrementItem } from "../../../store/actions/productActions";
-
+import { actionAddBill } from "../../../store/actions/netBillActions";
+import { useEffect } from "react";
 
 export default function ProductsAddedToCart() {
 
@@ -22,6 +23,15 @@ export default function ProductsAddedToCart() {
     const products = useSelector(state => state.productReducer);
     const productSelected = products.filter(p => p.isSelected === true);
     const classes = useStyles();
+    let totalBill = 0;
+    productSelected.forEach(item => {
+        totalBill = totalBill + (item.productPrice * item.quantity)
+    })
+
+    useEffect(() => {
+        //will be called when totalBill is calculated everytime useSelector returns val comp is rendered and useeffect is called
+        dispatch(actionAddBill(totalBill));
+    }, [totalBill]);
 
     //function to remove item from cart
     function removeFromCart(id) {
@@ -67,11 +77,11 @@ export default function ProductsAddedToCart() {
                                                 </Typography>
                                                 <div className="d-flex justify-content-center"><Typography className={classes.pTitle} variant="h6">
                                                     items</Typography>
-                                                    <div onClick={()=>{addItem(product.productId)}} title="increment item" ><AddCircleIcon /></div>
+                                                    <div onClick={() => { addItem(product.productId) }} title="increment item" ><AddCircleIcon /></div>
                                                     <div><Typography className={classes.pTitle} variant="h6">
                                                         {product.quantity}
                                                     </Typography></div>
-                                                    <div title="decrement item" onClick={()=>{subtractItem(product.productId)}}><RemoveCircleIcon /></div>
+                                                    <div title="decrement item" onClick={() => { subtractItem(product.productId) }}><RemoveCircleIcon /></div>
                                                 </div>
                                             </CardContent>
                                         </Card>

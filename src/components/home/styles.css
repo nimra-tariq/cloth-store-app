@@ -1,4 +1,4 @@
-div{
-        /* background: linear-gradient(45deg , rgb(205 198 198 / 35%),transparent), */
-        /* background: linear-gradient(45deg, black, transparent); */
-    }
+ a.active{
+    color:gray;
+    border: 2px solid #233dff;
+  }

@@ -12,11 +12,20 @@ export const useStyles = makeStyles(theme => createStyles({
     pages: {
         color: "#233dff",
         boxShadow: '0px 8px 10px #8080806b',
+        padding: '9px 15px',
+        borderRadius:'6px',
+        "&:hover": {
+            backgroundColor: '#d4ebff45'
+          }
     },
     pagesColor: {
         color: "#233dff"
     },
     highLightBorder: {
-        border: "2px solid"
+        border: "2px solid",
+        color:'black'
+    },
+    active:{
+        color:'red'
     }
 }))

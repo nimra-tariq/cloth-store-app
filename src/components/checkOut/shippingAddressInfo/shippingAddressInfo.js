@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useStyles } from '../styles';
 import { TextField } from '@material-ui/core';
-
+import {useDispatch} from 'react-redux'
+import { actionAddUserDetails } from '../../../store/actions/userAction';
 //fetches countryName
 async function fetchCountries() {
 
@@ -21,6 +22,15 @@ async function fetchCountries() {
 }
 
 const ShippingAddressInfo = () => {
+
+    const dispatch=useDispatch();
+    function submitDetails(){
+        let user={
+        uaddress:document.forms[1].address.value,
+        country:document.forms[1].country.value
+        }
+        dispatch(actionAddUserDetails(user))
+        }
 
     const classes = useStyles();
     const [countryList, setCountryList] = useState([]);
@@ -46,7 +56,7 @@ const ShippingAddressInfo = () => {
             .max(5, '5 digit code')
             .matches(/^[0-9]+$/, '* This field can contain numbers only')
             .required('Zip code required'),
-            address: yup
+        address: yup
             .string('Enter Address')
             .matches(/^\S*\S[^]*$/, '* This field cannot contain only blankspaces')
             .required('Address required'),
@@ -92,7 +102,7 @@ const ShippingAddressInfo = () => {
                             {countryNames}
                         </MySelect>
                     </div>
-                    <TextField
+                    <div><TextField
                         fullWidth
                         id="city"
                         name="city"
@@ -102,7 +112,8 @@ const ShippingAddressInfo = () => {
                         onChange={formik.handleChange}
                         error={formik.touched.city && Boolean(formik.errors.city)}
                         helperText={formik.touched.city && formik.errors.city}
-                    />
+                    /></div>
+                    <div>
                     <TextField
                         fullWidth
                         id="zip"
@@ -114,7 +125,8 @@ const ShippingAddressInfo = () => {
                         onChange={formik.handleChange}
                         error={formik.touched.zip && Boolean(formik.errors.zip)}
                         helperText={formik.touched.zip && formik.errors.zip}
-                    />
+                    /></div>
+                    <div>
                     <TextField
                         fullWidth
                         id="address"
@@ -125,8 +137,8 @@ const ShippingAddressInfo = () => {
                         onChange={formik.handleChange}
                         error={formik.touched.address && Boolean(formik.errors.address)}
                         helperText={formik.touched.address && formik.errors.address}
-                    />
-                    <Button color="primary" variant="contained" fullWidth type="submit">
+                    /></div>
+                    <Button color="primary" variant="contained" fullWidth type="submit" onClick={submitDetails}>
                         Submit
                     </Button>
                 </form>

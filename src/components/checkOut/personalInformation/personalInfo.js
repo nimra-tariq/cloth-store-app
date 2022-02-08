@@ -3,7 +3,8 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
+import { useDispatch } from 'react-redux';
+import { actionAddUserDetails } from '../../../store/actions/userAction';
 
 
 const validationSchema = yup.object({
@@ -26,8 +27,16 @@ const validationSchema = yup.object({
         .required('Last Name is required'),
 });
 
-
 const PersonalInfo = () => {
+    const dispatch=useDispatch();
+    function submitDetails(){
+        let user={
+        uname:document.forms[0].firstName.value,
+        uemail:document.forms[0].email.value
+        }
+        dispatch(actionAddUserDetails(user))
+        }
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -44,7 +53,7 @@ const PersonalInfo = () => {
     return (
         <div>
             <form onSubmit={formik.handleSubmit}>
-                <TextField
+               <div><TextField
                     fullWidth
                     id="email"
                     name="email"
@@ -54,7 +63,8 @@ const PersonalInfo = () => {
                     placeholder='foobar@example.com'
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}
-                />
+                /></div> 
+                <div>
                 <TextField
                     fullWidth
                     id="password"
@@ -65,8 +75,8 @@ const PersonalInfo = () => {
                     onChange={formik.handleChange}
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
-                />
-                <TextField
+                /></div>
+                <div><TextField
                     fullWidth
                     id="firstName"
                     name="firstName"
@@ -76,8 +86,8 @@ const PersonalInfo = () => {
                     onChange={formik.handleChange}
                     error={formik.touched.fisrtName && Boolean(formik.errors.fisrtName)}
                     helperText={formik.touched.fisrtName && formik.errors.fisrtName}
-                />
-                <TextField
+                /></div>
+                <div><TextField
                     fullWidth
                     id="lastName"
                     name="lastName"
@@ -87,8 +97,8 @@ const PersonalInfo = () => {
                     onChange={formik.handleChange}
                     error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                     helperText={formik.touched.lastName && formik.errors.lastName}
-                />
-                <Button color="primary" variant="contained" fullWidth type="submit">
+                /></div>
+                <Button color="primary" variant="contained" fullWidth type="submit" onClick={submitDetails}>
                     Submit
                 </Button>
             </form>
