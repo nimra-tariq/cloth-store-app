@@ -7,6 +7,11 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { useDispatch } from 'react-redux';
 import { actionAddUserDetails } from '../../store/actions/userAction';
+import { useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
+import Card from '@material-ui/core//Card';
+import CardContent from '@material-ui/core//CardContent';
+import { useStyles } from '../cart/styles';
 
 function generateCustomerPin() {
     return Math.floor(Math.random() * 8999 + 1000);
@@ -25,6 +30,8 @@ const validationSchema = yup.object({
 });
 
 const SignIn = () => {
+    const classes=useStyles()
+    const user = useSelector(state => state.userReducer)
     const dispatch = useDispatch();
     function submitDetails() {
         const userPin = generateCustomerPin();
@@ -32,7 +39,7 @@ const SignIn = () => {
             password: document.forms[0].password.value,
             uemail: document.forms[0].email.value,
             upin: userPin,
-            signedIn:true,
+            signedIn: true,
         }
         dispatch(actionAddUserDetails(user));
     }
@@ -44,46 +51,63 @@ const SignIn = () => {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            // alert(JSON.stringify(values, null, 2));
             submitDetails();
         },
     });
 
-    return (
-        <div className='container'>
-            <Typography variant="h4" align='center'>
-                Sign in
-                <br />
-            </Typography>
-            <form onSubmit={formik.handleSubmit}>
-                <div><TextField
-                    fullWidth
-                    id="email"
-                    name="email"
-                    label="Email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    placeholder='foobar@example.com'
-                    error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
-                /></div>
-                <div>
-                    <TextField
+    return (<>
+        {(!user.signedIn) ?
+            <div className='container'>
+                <Typography variant="h4" align='center'>
+                    Sign in
+                    <br />
+                </Typography>
+                <form onSubmit={formik.handleSubmit}>
+                    <div><TextField
                         fullWidth
-                        id="password"
-                        name="password"
-                        label="Password"
-                        type="password"
-                        value={formik.values.password}
+                        id="email"
+                        name="email"
+                        label="Email"
+                        value={formik.values.email}
                         onChange={formik.handleChange}
-                        error={formik.touched.password && Boolean(formik.errors.password)}
-                        helperText={formik.touched.password && formik.errors.password}
+                        placeholder='foobar@example.com'
+                        error={formik.touched.email && Boolean(formik.errors.email)}
+                        helperText={formik.touched.email && formik.errors.email}
                     /></div>
-                <Button color="primary" variant="contained" fullWidth type="submit" >
-                    Submit
-                </Button>
-            </form>
-        </div>
+                    <div>
+                        <TextField
+                            fullWidth
+                            id="password"
+                            name="password"
+                            label="Password"
+                            type="password"
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            error={formik.touched.password && Boolean(formik.errors.password)}
+                            helperText={formik.touched.password && formik.errors.password}
+                        /></div>
+                    <Button color="primary" variant="contained" fullWidth type="submit" >
+                        Submit
+                    </Button>
+                </form>
+            </div> : <div className="container"><Box sx={{ minWidth: 275 }} className={classes.box} >
+                <Card variant="outlined">
+                    <Card sx={{ minWidth: 275 }}>
+                        <CardContent>
+                            <Typography className={classes.title} variant="h6">
+                                Thank you for registering your customer account
+                                <br />
+                            </Typography>
+                            <Typography className={classes.title} variant="h5">
+                                your customer pin is {user.upin}
+                                <br />
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Card>
+            </Box>
+            </div>
+        }</>
     );
 };
 

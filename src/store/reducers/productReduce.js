@@ -62,6 +62,10 @@ export function productReducer(state = initialState, action) {
         return p
       });
 
+      //reset product state
+      case 'RESET':
+            return initialState
+           
     default:
       return state;
   }

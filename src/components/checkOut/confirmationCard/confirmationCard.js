@@ -7,10 +7,18 @@ import Typography from '@material-ui/core//Typography';
 import { useStyles } from '../styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { actionResetUser } from '../../../store/actions/userAction';
+import { actionResetProductState } from '../../../store/actions/productActions';
 
 export default function ConfirmationCard() {
+  const dispatch = useDispatch()
   const classes = useStyles()
   let orderNum = Math.floor(Math.random() * 899999 + 100000);
+  const reset = () => {
+    dispatch(actionResetUser());
+    dispatch(actionResetProductState());
+  }
   return <div className='container'>
     <Box sx={{ minWidth: 275 }} className={classes.box} >
       <Card variant="outlined">
@@ -32,6 +40,6 @@ export default function ConfirmationCard() {
         </Card>
       </Card>
     </Box>
-    <Link to='home'><div> <ArrowBackIcon />Back To Home</div></Link>
+    <Link to='home' onClick={reset}><div> <ArrowBackIcon />Back To Home</div></Link>
   </div>;
 }

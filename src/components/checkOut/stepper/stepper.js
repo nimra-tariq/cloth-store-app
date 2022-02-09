@@ -3,37 +3,18 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import ConfirmationCard from '../confirmationCard/confirmationCard';
+import PersonalInfo from '../personalInformation/personalInfo';
+import ShippingAddressInfo from '../shippingAddressInfo/shippingAddressInfo';
+import PlaceOrder from '../placeOrder/placeOrder';
 
 const steps = ['Personal Info', 'Shipping Address', 'Place Order'];
 
 export default function FormStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
-
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
 
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-
-  const handleReset = () => {
-    setActiveStep(0);
   };
 
   return (
@@ -52,32 +33,21 @@ export default function FormStepper() {
       </Stepper>
       {activeStep === steps.length ? (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
+          <ConfirmationCard></ConfirmationCard>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset}>Reset</Button>
           </Box>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: '1 1 auto' }} />
-        
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
-          </Box>
+          {
+            //step1 display personalInfo Form
+            (activeStep + 1 == 1) ? <PersonalInfo handleNext={handleNext}></PersonalInfo>
+              //step2 display ShippingAddressInfo Form
+              : (activeStep + 1 == 2) ? <ShippingAddressInfo handleNext={handleNext}></ShippingAddressInfo>
+                //step3 display PlaceOrder Form
+                : <PlaceOrder handleNext={handleNext}></PlaceOrder >
+          }
         </React.Fragment>
       )}
     </Box>

@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useStyles } from '../styles';
 import { TextField } from '@material-ui/core';
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { actionAddUserDetails } from '../../../store/actions/userAction';
-//fetches countryName
+
+//fetches countryName form api and populate to dropdown list
 async function fetchCountries() {
 
     try {
@@ -21,16 +22,16 @@ async function fetchCountries() {
 
 }
 
-const ShippingAddressInfo = () => {
+const ShippingAddressInfo = (props) => {
 
-    const dispatch=useDispatch();
-    function submitDetails(){
-        let user={
-        uaddress:document.forms[1].address.value,
-        country:document.forms[1].country.value
+    const dispatch = useDispatch();
+    function submitDetails() {
+        let user = {
+            uaddress: document.forms[0].address.value,
+            country: document.forms[0].country.value
         }
         dispatch(actionAddUserDetails(user))
-        }
+    }
 
     const classes = useStyles();
     const [countryList, setCountryList] = useState([]);
@@ -67,11 +68,15 @@ const ShippingAddressInfo = () => {
             country: '',
             city: '',
             zip: '',
-            address:''
+            address: ''
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+            // alert(JSON.stringify(values, null, 2));
+            //update userInfo in store
+            submitDetails();
+            //handling NextStep 
+            props.handleNext();
         },
     });
 
@@ -114,31 +119,31 @@ const ShippingAddressInfo = () => {
                         helperText={formik.touched.city && formik.errors.city}
                     /></div>
                     <div>
-                    <TextField
-                        fullWidth
-                        id="zip"
-                        name="zip"
-                        label="Zip Code"
-                        name='zip'
-                        type='number'
-                        value={formik.values.zip}
-                        onChange={formik.handleChange}
-                        error={formik.touched.zip && Boolean(formik.errors.zip)}
-                        helperText={formik.touched.zip && formik.errors.zip}
-                    /></div>
+                        <TextField
+                            fullWidth
+                            id="zip"
+                            name="zip"
+                            label="Zip Code"
+                            name='zip'
+                            type='number'
+                            value={formik.values.zip||''}
+                            onChange={formik.handleChange}
+                            error={formik.touched.zip && Boolean(formik.errors.zip)}
+                            helperText={formik.touched.zip && formik.errors.zip}
+                        /></div>
                     <div>
-                    <TextField
-                        fullWidth
-                        id="address"
-                        name="address"
-                        label="Address"
-                        type="text"
-                        value={formik.values.address}
-                        onChange={formik.handleChange}
-                        error={formik.touched.address && Boolean(formik.errors.address)}
-                        helperText={formik.touched.address && formik.errors.address}
-                    /></div>
-                    <Button color="primary" variant="contained" fullWidth type="submit" onClick={submitDetails}>
+                        <TextField
+                            fullWidth
+                            id="address"
+                            name="address"
+                            label="Address"
+                            type="text"
+                            value={formik.values.address||''}
+                            onChange={formik.handleChange}
+                            error={formik.touched.address && Boolean(formik.errors.address)}
+                            helperText={formik.touched.address && formik.errors.address}
+                        /></div>
+                    <Button color="primary" variant="contained" fullWidth type="submit" >
                         Submit
                     </Button>
                 </form>

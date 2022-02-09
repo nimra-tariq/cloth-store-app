@@ -6,13 +6,13 @@ import CardContent from '@material-ui/core//CardContent';
 import Typography from '@material-ui/core//Typography';
 import { useStyles } from '../styles'
 import { useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
 
-
-const PlaceOrder = () => {
+const PlaceOrder = (props) => {
   const classes = useStyles();
   const products = useSelector(state => state.productReducer);
   const netBill = useSelector(state => state.netBillReducer)
-  const user=useSelector(state=>state.userReducer)
+  const user = useSelector(state => state.userReducer)
   const productSelected = products.filter(p => p.isSelected === true);
 
   return <div className='container'>
@@ -70,6 +70,9 @@ const PlaceOrder = () => {
         </Card>
       </Card>
     </Box>
+    <Button color="primary" variant="contained" fullWidth type="submit" onClick={props.handleNext}>
+      PlaceOrder
+    </Button>
   </div>;
 };
 

@@ -40,11 +40,7 @@ function App() {
       <Route path='/placeOrder' element={<PlaceOrder/>}></Route>
       <Route path='/signIn' element={<SignIn/>}></Route>
     </Routes>
-    {/* <ConfirmationCard ></ConfirmationCard> */}
     </BrowserRouter>
-    {/* <PersonalInfo></PersonalInfo>
-    <ShippingAddressInfo></ShippingAddressInfo> */}
-   
     </Provider>
     </div>
     <div><Footer></Footer></div>

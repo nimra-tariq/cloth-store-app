@@ -27,3 +27,9 @@ export function actionAddToCart(id) {
       payload:id
     }
   }
+  export function actionResetProductState()
+  {
+    return{
+      type:'RESET'
+    }
+  }
