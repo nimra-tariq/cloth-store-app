@@ -25,7 +25,7 @@ export const useStyles = makeStyles(theme => createStyles({
         border: "2px solid",
         color:'black'
     },
-    active:{
-        color:'red'
+    title:{
+        color:'#233dff'
     }
 }))

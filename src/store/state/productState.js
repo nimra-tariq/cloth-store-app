@@ -2,7 +2,7 @@ export const productState=[
     {   
         productId:1,
         productImage: 'https://static-01.daraz.pk/p/f75594efa8a2688e921629e274a043ba.jpg',
-        productTitle: "New Stylish Printed hoodie For Girl",
+        productTitle: "New Stylish Printed hoodie",
         productPrice: '35',
         isSelected:false,
         quantity:0
@@ -11,7 +11,7 @@ export const productState=[
     {   
         productId:2,
         productImage: 'https://static-01.daraz.pk/p/d7ee8fc218b058800c1baef9d4562b92.jpg',
-        productTitle: "Cotton Printed T Shirt For Men",
+        productTitle: "Cotton Printed T Shirt",
         productPrice: '40',
         isSelected:false,
         quantity:0
@@ -19,7 +19,7 @@ export const productState=[
     {   
         productId:3,
         productImage: 'https://static-01.daraz.pk/p/05a377a98301bc9386059c22d33469a8.jpg',
-        productTitle: "Roman Needle Mover Official T-Shirt",
+        productTitle: "Roman Mover Official T-Shirt",
         productPrice: '60',
         isSelected:false,
         quantity:0
@@ -27,7 +27,7 @@ export const productState=[
     {   
         productId:4,
         productImage: 'https://m.media-amazon.com/images/I/61nk3CmoMfL._AC_UL320_.jpg',
-        productTitle: "Damipow Womens Dress Shirt",
+        productTitle: "Damipow Dress Shirt",
         productPrice: '80',
         isSelected:false,
         quantity:0
@@ -35,7 +35,7 @@ export const productState=[
     {   
         productId:5,
         productImage: 'https://m.media-amazon.com/images/I/91oTJMbjaPL._AC_UL320_.jpg',
-        productTitle: "Carter's Toddler Boys' Fleece Joggers",
+        productTitle: "Carter's Boys' Joggers",
         productPrice: '30',
         isSelected:false,
         quantity:0
@@ -51,7 +51,7 @@ export const productState=[
     {   
         productId:7,
         productImage: 'https://m.media-amazon.com/images/I/71ZV1YfhxNL._AC_UL320_.jpg',
-        productTitle: "Boy Active Striped Fleece Jogger",
+        productTitle: "Boy Fleece Jogger",
         productPrice: '200',
         isSelected:false,
         quantity:0

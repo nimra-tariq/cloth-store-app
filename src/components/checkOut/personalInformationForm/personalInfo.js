@@ -6,9 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import { useDispatch } from 'react-redux';
 import { actionAddUserDetails } from '../../../store/actions/userAction';
 import { useSelector } from 'react-redux';
+import { useStyles } from '../../cart/styles';
 
 const PersonalInfo = (props) => {
-
+    const classes = useStyles();
     const user = useSelector(state => state.userReducer)
 
     const validationSchema = yup.object({
@@ -16,7 +17,7 @@ const PersonalInfo = (props) => {
         pin: yup
             .string('Enter your Customer Pin Code')
             .min(4, '4 character pin')
-            .matches(user.upin,'incorrect pin code')
+            .matches(user.upin, 'incorrect pin code')
             .required('required'),
         fisrtName: yup
             .string('Enter First Name')
@@ -28,13 +29,13 @@ const PersonalInfo = (props) => {
             .required('Last Name is required'),
     });
 
-    const dispatch=useDispatch();
-    function submitDetails(){
-        let user={
-        uname:document.forms[0].firstName.value
+    const dispatch = useDispatch();
+    function submitDetails() {
+        let user = {
+            uname: document.forms[0].firstName.value
         }
         dispatch(actionAddUserDetails(user))
-        }
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -56,43 +57,45 @@ const PersonalInfo = (props) => {
     return (
         <div>
             <form onSubmit={formik.handleSubmit}>
-                <div><TextField
+                <div className={classes.btnMargin}><TextField
                     fullWidth
                     id="firstName"
                     name="firstName"
                     label="First Name"
                     name='fisrtName'
-                    value={formik.values.fisrtName||''}
+                    value={formik.values.fisrtName || ''}
                     onChange={formik.handleChange}
                     error={formik.touched.fisrtName && Boolean(formik.errors.fisrtName)}
                     helperText={formik.touched.fisrtName && formik.errors.fisrtName}
                 /></div>
-                <div><TextField
+                <div className={classes.btnMargin}><TextField
                     fullWidth
                     id="lastName"
                     name="lastName"
                     label="Last Name"
                     name='lastName'
-                    value={formik.values.lastName||''}
+                    value={formik.values.lastName || ''}
                     onChange={formik.handleChange}
                     error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                     helperText={formik.touched.lastName && formik.errors.lastName}
                 /></div>
-                 <div>
-                <TextField
-                    fullWidth
-                    id="pin"
-                    name="pin"
-                    label="Customer pin"
-                    type="password"
-                    value={formik.values.pin||''}
-                    onChange={formik.handleChange}
-                    error={formik.touched.pin && Boolean(formik.errors.pin)}
-                    helperText={formik.touched.pin && formik.errors.pin}
-                /></div> 
-                <Button color="primary" variant="contained" fullWidth type="submit" >
+                <div className={classes.btnMargin}>
+                    <TextField
+                        fullWidth
+                        id="pin"
+                        name="pin"
+                        label="Customer pin"
+                        type="password"
+                        value={formik.values.pin || ''}
+                        onChange={formik.handleChange}
+                        error={formik.touched.pin && Boolean(formik.errors.pin)}
+                        helperText={formik.touched.pin && formik.errors.pin}
+                    /></div>
+                    <div className={classes.btnMargin}>
+                <Button className={classes.btn} color="primary" variant="contained" fullWidth type="submit" >
                     Submit
                 </Button>
+                </div>
             </form>
         </div>
     );

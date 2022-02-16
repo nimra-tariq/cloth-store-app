@@ -1,10 +1,11 @@
-import { withTheme } from "@emotion/react";
+
 import { makeStyles, createStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles(theme => createStyles({
    
     tagLine:{
-        color:"white"
+        color:"white",
+        padding:'10px'
     },
     bodyBgImg:{
         backgroundImage: 'linear-gradient(rgb(1 3 20 / 40%),rgb(0 0 0 / 21%))'+','+`url(${"bodyImg.jpg"})`,
@@ -17,7 +18,9 @@ export const useStyles = makeStyles(theme => createStyles({
         
     },
     paragraph:{
-        color:"white"
+        color:"white",
+        marginTop:'20px',
+        padding:'10px'
     },
     textContainer:{
         position:"absolute",
@@ -30,4 +33,3 @@ export const useStyles = makeStyles(theme => createStyles({
         height:"fit-content"
     }
 }))
-// rgb(60 83 253 / 37%),rgb(0 0 0 / 21%))

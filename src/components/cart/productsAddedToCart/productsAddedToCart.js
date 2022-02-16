@@ -62,9 +62,9 @@ export default function ProductsAddedToCart() {
                     <Grid container spacing={3} justifyContent="center">
                         {productSelected.map((product, i) => {
                             return <Grid item key={i} elevation={10} xs={12} sm={12} md={6}>
-                                <Box sx={{ minWidth: 275 }} className={classes.box} >
+                                <Box sx={{ minWidth: 230 }} className={classes.box} >
                                     <Card variant="outlined">
-                                        <Card sx={{ minWidth: 275 }}>
+                                        <Card sx={{ minWidth: 230 }}>
                                             <div aria-label='Remove Product' title="remove from cart" className={classes.removeIconDiv}><span className={classes.removeIcon}><CancelIcon onClick={() => { removeFromCart(product.productId) }} /></span></div>
                                             <CardContent>
                                                 <div className={classes.productImg} ><img src={product.productImage} alt={product.productTitle} height='180px' /></div>
@@ -75,13 +75,13 @@ export default function ProductsAddedToCart() {
                                                 <Typography variant="h5" className={classes.pPrice} component="div">
                                                     {product.productPrice}.00$
                                                 </Typography>
-                                                <div className="d-flex justify-content-center"><Typography className={classes.pTitle} variant="h6">
+                                                <div  className="d-flex justify-content-center"><Typography className={classes.pTitle} variant="h6">
                                                     items</Typography>
-                                                    <div onClick={() => { addItem(product.productId) }} title="increment item" ><AddCircleIcon /></div>
-                                                    <div><Typography className={classes.pTitle} variant="h6">
+                                                    <div className={classes.sBox} onClick={() => { addItem(product.productId) }} title="increment item" ><AddCircleIcon /></div>
+                                                    <div ><Typography className={classes.pTitle} variant="h6">
                                                         {product.quantity}
                                                     </Typography></div>
-                                                    <div title="decrement item" onClick={() => { subtractItem(product.productId) }}><RemoveCircleIcon /></div>
+                                                    <div className={classes.sBox} title="decrement item" onClick={() => { subtractItem(product.productId) }}><RemoveCircleIcon /></div>
                                                 </div>
                                             </CardContent>
                                         </Card>

@@ -1,4 +1,4 @@
-import { productState } from "../state/productInfoState";
+import { productState } from "../state/productState";
 
 const initialState = productState;
 
@@ -16,7 +16,7 @@ export function productReducer(state = initialState, action) {
         {
           ...product,
           isSelected: true,
-          quantity: product.quantity + 1
+          quantity: 1
         }
       ];
     //remove product from cart
@@ -41,7 +41,7 @@ export function productReducer(state = initialState, action) {
     //increment quantity by 1
     case 'INCREMENT_ITEM':
       return state.map((p) => {
-        if (p.productId == product.productId)
+        if (p.productId === product.productId)
           return {
             ...product,
             quantity: product.quantity + 1
@@ -52,7 +52,7 @@ export function productReducer(state = initialState, action) {
     //decrement quantity by 1
     case 'DECREMENT_ITEM':
       return state.map((p) => {
-        if (p.productId == product.productId)
+        if (p.productId === product.productId)
           return {
             ...product,
             quantity: product.quantity - 1,

@@ -139,16 +139,16 @@ const NavBar = () => {
                             onClose={handleCloseUserMenu}
                         >
                             {(!user.signedIn)?<SignIn></SignIn>:
-                            <div className="container"><Box sx={{ minWidth: 275 }} className={classes.box} >
+                            <div className="container"><Box sx={{ minWidth: 230 }} className={classes.box} >
                             <Card variant="outlined">
-                              <Card sx={{ minWidth: 275 }}>
+                              <Card sx={{ minWidth: 230 }}>
                                 <CardContent>
-                                  <Typography className={classes.title} variant="h6">
-                                    Thank you for registering your customer account
+                                  <Typography  variant="h6">
+                                    Thank you for registering your customer account pin is 
                                     <br />
                                   </Typography>
                                   <Typography className={classes.title} variant="h5">
-                                    your customer pin is {user.upin}
+                                    {user.upin}
                                     <br />
                                   </Typography>
                                 </CardContent>

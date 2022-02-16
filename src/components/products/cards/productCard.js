@@ -8,19 +8,27 @@ import { Link } from "react-router-dom";
 import { useStyles } from './styles'
 import { useDispatch } from 'react-redux';
 import { actionAddToCart } from '../../../store/actions/productActions';
+import './styles.css'
 
 export default function ProductCard(props) {
 
   const classes = useStyles();
   const dispatch = useDispatch();
-  function addToCart(id) {
+
+  function addToCart(id, e) {
     dispatch(actionAddToCart(id));
+    let buttnons = document.querySelectorAll('button');
+    for (let i = 0; i < buttnons.length; i++) {
+      buttnons[i].classList.remove('btnClicked')
+    }
+    let clickedBtn = e.currentTarget;
+    clickedBtn.classList.add('btnClicked');
   }
 
   return (<>
-    <Box sx={{ minWidth: 275 }} className={classes.box} >
+    <Box sx={{ minWidth: 230 }} className={classes.box} >
       <Card variant="outlined">
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: 230 }}>
           <CardContent>
             <Link to={`/${props.productId}`}>  <div className={classes.productImg} ><img src={props.productImage} alt={props.productTitle} height='180px' /></div></Link>
             <Typography className={classes.pTitle} variant="h6">
@@ -30,7 +38,7 @@ export default function ProductCard(props) {
             <Typography variant="h5" className={classes.pPrice} component="div">
               {props.productPrice}.00$
             </Typography>
-            <div aria-label='add to cart' onClick={() => { addToCart(props.productId) }} className={classes.cartDiv}><span className={classes.cartIcon}><AddShoppingCartIcon /></span></div>
+            <div aria-label='add to cart' className={classes.cartDiv}><button title='add to cart' onClick={(e) => { addToCart(props.productId, e) }} className={classes.cartIcon}><AddShoppingCartIcon /></button></div>
           </CardContent>
         </Card>
       </Card>

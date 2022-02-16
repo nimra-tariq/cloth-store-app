@@ -6,7 +6,6 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
-import '@fontsource/roboto/500.css';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -15,7 +14,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-export default function Body() {
+export default function Background() {
     const classes = useStyles();
     return (
         <Box sx={{ width: '100%' }}>
@@ -27,7 +26,7 @@ export default function Body() {
                                 Design You Wear
                             </Typography>
                             <div className='container'>
-                                <Typography paragraph={true} className={classes.paragraph} variant="h6" component="h6">
+                                <Typography paragraph={true} className={classes.paragraph} >
                                     Designer has been your companion in happiness, both big and small, for over 50 years. Our roots are firmly grounded in Pakistan and with its people.
                                 </Typography>
                             </div>

@@ -2,7 +2,7 @@ import ProductCard from "./productCard";
 import { Grid } from '@material-ui/core';
 import { useStyles } from "./styles";
 import { Typography } from "@material-ui/core";
-import { productState } from "../../../store/state/productInfoState";
+import { productState } from "../../../store/state/productState";
 
 
 export default function CardContainer() {

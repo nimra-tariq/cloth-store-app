@@ -20,26 +20,27 @@ export default function ConfirmationCard() {
     dispatch(actionResetProductState());
   }
   return <div className='container'>
-    <Box sx={{ minWidth: 275 }} className={classes.box} >
+    <Box sx={{ minWidth: 230 }} className={classes.box} >
       <Card variant="outlined">
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: 230 }}>
           <CardContent>
-            <Typography className={classes.title} variant="h6">
-              Thank you for your order
+            <Typography className={classes.title} variant="h4">
+              Thank you for your order!
               <br />
             </Typography>
             <Typography paragraph={true} className={classes.aboutParagraph} >
-              Your order number is #{orderNum}. We have emailed your order confirmation, and will send you an update when your order has shipped.
+              Your order number is <span className={classes.pPrice}>#{orderNum}</span>. We have emailed your order confirmation, and will send you an update when your order has shipped.
               <br />
             </Typography>
-            <Typography className={classes.title} variant="h5">
-              Don't worry it's just a template !
+            <Typography className={classes.pTitle} variant="h6">
+              Don't worry it's just a template :)
               <br />
             </Typography>
+            <Link to='/' onClick={reset}><div className={classes.goBack}> <ArrowBackIcon />Back To Home</div></Link>
           </CardContent>
         </Card>
       </Card>
     </Box>
-    <Link to='home' onClick={reset}><div> <ArrowBackIcon />Back To Home</div></Link>
+
   </div>;
 }

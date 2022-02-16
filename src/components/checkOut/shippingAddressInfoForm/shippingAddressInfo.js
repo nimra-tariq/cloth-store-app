@@ -11,7 +11,6 @@ import { actionAddUserDetails } from '../../../store/actions/userAction';
 
 //fetches countryName form api and populate to dropdown list
 async function fetchCountries() {
-
     try {
         const response = await axios.get('https://covid19.mathdro.id/api/countries');
         return response.data.countries.map((country) => country.name)
@@ -19,7 +18,6 @@ async function fetchCountries() {
     catch (e) {
         console.log(e);
     }
-
 }
 
 const ShippingAddressInfo = (props) => {
@@ -56,6 +54,7 @@ const ShippingAddressInfo = (props) => {
             .string('Enter City Zip Code')
             .max(5, '5 digit code')
             .matches(/^[0-9]+$/, '* This field can contain numbers only')
+            .matches(/(\d{5})/g, '* 5 digit code')
             .required('Zip code required'),
         address: yup
             .string('Enter Address')
@@ -89,7 +88,7 @@ const ShippingAddressInfo = (props) => {
     const MySelect = ({ label, ...props }) => {
         const [field, meta] = useField(props);
         return (
-            <div className='container'>
+            <div>
                 <select {...field} {...props} className={classes.selectCountry.toString()} />
                 {meta.touched && meta.error ? (
                     <div className="error" className={classes.errorColor.toString()} >{meta.error}</div>
@@ -101,13 +100,13 @@ const ShippingAddressInfo = (props) => {
         <div>
             <FormikProvider value={formik}>
                 <form onSubmit={formik.handleSubmit}>
-                    <div>
+                    <div className={classes.list}>
                         <MySelect label="country" name="country">
                             <option value={""} size="small">Select Country Name</option>
                             {countryNames}
                         </MySelect>
                     </div>
-                    <div><TextField
+                    <div className={classes.btnMargin}><TextField
                         fullWidth
                         id="city"
                         name="city"
@@ -118,7 +117,7 @@ const ShippingAddressInfo = (props) => {
                         error={formik.touched.city && Boolean(formik.errors.city)}
                         helperText={formik.touched.city && formik.errors.city}
                     /></div>
-                    <div>
+                    <div className={classes.btnMargin}>
                         <TextField
                             fullWidth
                             id="zip"
@@ -126,26 +125,28 @@ const ShippingAddressInfo = (props) => {
                             label="Zip Code"
                             name='zip'
                             type='number'
-                            value={formik.values.zip||''}
+                            value={formik.values.zip || ''}
                             onChange={formik.handleChange}
                             error={formik.touched.zip && Boolean(formik.errors.zip)}
                             helperText={formik.touched.zip && formik.errors.zip}
                         /></div>
-                    <div>
+                    <div className={classes.btnMargin}>
                         <TextField
                             fullWidth
                             id="address"
                             name="address"
                             label="Address"
                             type="text"
-                            value={formik.values.address||''}
+                            value={formik.values.address || ''}
                             onChange={formik.handleChange}
                             error={formik.touched.address && Boolean(formik.errors.address)}
                             helperText={formik.touched.address && formik.errors.address}
                         /></div>
-                    <Button color="primary" variant="contained" fullWidth type="submit" >
-                        Submit
-                    </Button>
+                    <div className={classes.btnMargin}>
+                        <Button className={classes.btn} color="primary" variant="contained" fullWidth type="submit" >
+                            Submit
+                        </Button>
+                    </div>
                 </form>
             </FormikProvider>
         </div>

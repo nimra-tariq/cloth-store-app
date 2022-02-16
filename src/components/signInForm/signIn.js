@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { useFormik } from 'formik';
 import Typography from '@material-ui/core//Typography';
@@ -30,8 +30,11 @@ const validationSchema = yup.object({
 });
 
 const SignIn = () => {
-    const classes=useStyles()
+    const classes = useStyles()
     const user = useSelector(state => state.userReducer)
+    const products = useSelector(state => state.productReducer);
+    const productSelected = products.filter(p => p.isSelected === true);
+
     const dispatch = useDispatch();
     function submitDetails() {
         const userPin = generateCustomerPin();
@@ -55,9 +58,9 @@ const SignIn = () => {
         },
     });
 
-    return (<>
+    return (<div>
         {(!user.signedIn) ?
-            <div className='container'>
+            <div className='container' className={classes.container}>
                 <Typography variant="h4" align='center'>
                     Sign in
                     <br />
@@ -70,7 +73,7 @@ const SignIn = () => {
                         label="Email"
                         value={formik.values.email}
                         onChange={formik.handleChange}
-                        placeholder='foobar@example.com'
+                        placeholder='yourname@example.com'
                         error={formik.touched.email && Boolean(formik.errors.email)}
                         helperText={formik.touched.email && formik.errors.email}
                     /></div>
@@ -86,28 +89,38 @@ const SignIn = () => {
                             error={formik.touched.password && Boolean(formik.errors.password)}
                             helperText={formik.touched.password && formik.errors.password}
                         /></div>
-                    <Button color="primary" variant="contained" fullWidth type="submit" >
+                    <div className={classes.btnMargin}><Button color="primary" variant="contained" className={classes.btn} fullWidth type="submit" >
                         Submit
                     </Button>
+                    </div>
                 </form>
-            </div> : <div className="container"><Box sx={{ minWidth: 275 }} className={classes.box} >
+            </div> : <div  ><Box sx={{ minWidth: 230 }} className='container' className={classes.container} >
                 <Card variant="outlined">
-                    <Card sx={{ minWidth: 275 }}>
+                    <Card sx={{ minWidth: 230 }}>
                         <CardContent>
                             <Typography className={classes.title} variant="h6">
                                 Thank you for registering your customer account
+                                your customer pin is
                                 <br />
                             </Typography>
-                            <Typography className={classes.title} variant="h5">
-                                your customer pin is {user.upin}
+                            <Typography className={classes.pPrice} variant="h4" color='primary'>
+                                {user.upin}
                                 <br />
                             </Typography>
+                            {(productSelected.length) ?
+                                <Link to='/checkOut'>
+                                    <Button className={classes.btn} align='center' sx={{ my: 2, backgroundColor: '#233dff', color: '#ffffff', fontWeight: '400', fontSize: 16 }}>
+                                        Proceed To checkOut
+                                    </Button>
+                                </Link> :
+                                null
+                            }
                         </CardContent>
                     </Card>
                 </Card>
             </Box>
             </div>
-        }</>
+        }</div>
     );
 };
 

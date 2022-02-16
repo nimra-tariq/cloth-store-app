@@ -20,7 +20,6 @@ span{
 	margin-right: 10px;
 }
 .footerContainer{
-    /* margin-top: 20px;   */
     display: flex;
     flex-wrap: wrap;
     justify-content: center !important;
@@ -33,6 +32,9 @@ span{
     justify-content: center;
 }
 div.bgFooter{
-    background-color: #ad9f8e3b;
-    font-family: 'Roboto', sans-serif ;
+    background-color: #ad9f8e3b; 
+}
+div.footer:nth-child(2){
+    line-height: 2.3em;
+    color: green;
 }

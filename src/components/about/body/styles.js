@@ -32,7 +32,7 @@ export const useStyles = makeStyles(theme => createStyles({
     },
     aboutDiv:{
         background: 'linear-gradient(45deg, #8b868699, transparent)',
-        padding:"10%"
+        padding:"5%"
     },
     aboutStatement:{
         color:"#233dff"
@@ -43,8 +43,4 @@ export const useStyles = makeStyles(theme => createStyles({
         fontSize:"1.1rem"
 
     },
-    removePadding:{
-        padding:"0px !important" ,
-    },
 }))
-// rgb(60 83 253 / 37%),rgb(0 0 0 / 21%))

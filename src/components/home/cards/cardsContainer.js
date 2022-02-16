@@ -4,7 +4,7 @@ import { useStyles } from "./styles";
 import { Typography } from "@material-ui/core";
 
 export default function CardContainer() {
-    const classes=useStyles()
+    const classes = useStyles()
     let cardArray = [
         {
             productImage: 'https://m.media-amazon.com/images/I/91LQqnCd6TL._AC_UX342_.jpg',
@@ -31,24 +31,19 @@ export default function CardContainer() {
 
         }
     ]
-    return <>  
+    return <>
         <div className="container">
-        <Typography className={classes.newArrival} variant="h4">
-           New Arrivals
-              <br />
-        </Typography>
+            <Typography className={classes.newArrival} variant="h4">
+                New Arrivals
+                <br />
+            </Typography>
             <Grid container spacing={3} justifyContent="center">
                 {cardArray.map((card, i) => {
-                    return <Grid item key={i} elevation={10} xs={4} sm={12} md={6}>
+                    return <Grid className='container' item key={i} elevation={10} xs={12} sm={12} md={12} lg={4}>
                         <ProductCard cardNo={i} productImage={card.productImage} productTitle={card.productTitle} productPrice={card.productPrice}></ProductCard>
                     </Grid>
                 })}
             </Grid>
         </div>
-    {/* ) : <div className="d-flex justify-content-center align-items-center text-center vh-100 min-vh-100" >
-        <div className="spinner-border" role="status">
-            <span className="sr-only">Loading...</span>
-        </div>
-    </div> */}
     </>
 }
