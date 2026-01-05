@@ -13,7 +13,7 @@ export default function Footer() {
                 <a href="https://github.com/nimra-tariq" className="nav-item nav-link"><GitHubIcon style={{ color: '#233dff' }} /></a>
                 <a href="https://www.linkedin.com/in/nimra-tariq-6784aa1b0/" className="nav-item nav-link"><LinkedInIcon style={{ color: '#233dff' }} /></a>
             </div>
-            <div className='footer margin'><span><EmailIcon style={{ color: '#233dff' }} /></span><span>nimratariq899@gmail.com</span></div>
+            <div className='footer margin'><span><EmailIcon style={{ color: '#233dff' }} /></span><span>nimra.tariq.dev@gmail.com</span></div>
         </div>
     </div>
 }
